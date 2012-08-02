@@ -8,14 +8,14 @@ then
 fi
 
 # check for valid args
-if test $1 -lt 0
+if [ $1 -lt 0  ]
 then
 	echo "$0: argument 1 must be a non-negative integer"
 	exit
 fi
 
 counter=0
-while test $counter -lt $1
+while [ $counter -lt $1 ] 
 do
 	echo $2
 	counter=$((counter+1))
