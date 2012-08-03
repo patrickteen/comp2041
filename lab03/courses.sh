@@ -9,13 +9,11 @@ urlPostgrad="http://www.handbook.unsw.edu.au/vbook2011/brCoursesByAtoZ.jsp?Study
 
 #set -x
 
-# grab the data
-
-underGrad=`wget -qO- $urlUndergrad | \
-	   egrep -o \
-	   "<TD class=\"(evenTableCell)?\"><A href=\"http://www.handbook\.unsw\.edu\.au/undergraduate/courses/201[0-9]/$1[0-9]{4}\.html\">.+?</A></TD>" | \
-	   sed -r "s/<TD.+?($1[0-9]{4}).+?>(.+?)<\/A>.+?TD>/\1 \2\\n/g"`
-	
-# remove html tags
-
-echo $underGrad
+wget -qO- $urlUndergrad $urlPostgrad | \
+egrep -o \
+"<TD class=\"(evenTableCell)?\"><A href=\"http://www.handbook\.unsw\.edu\.au/(post|under)graduate/courses/201[0-9]/$1[0-9]{4}\.html\">.+?</A></TD>" | \
+sed -r "s/<TD.+?($1[0-9]{4}).+?>(.+?)<\/A>.+?TD>/\1 \2/g" | \
+sed 's/ *$//g' | \
+sort | \
+uniq -w8 | \
+sort
