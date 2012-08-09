@@ -13,6 +13,6 @@ then
 
 	# overwrite the original file if successful
 	mv "/tmp/$1.$$" "./$1"
-	rm "/tmp/$1.$$"
-	
+	touch -d"$dateStamp" "./$1"
+
 fi
