@@ -9,8 +9,9 @@ while ($line = <STDIN>) {
 $j = 0;
 while ($j < $i) {
 	$random_n = rand($i);
-	if ($lines[$random_n] != "NaN") {
+	if ($lines[$random_n] !~ /NaN/) {
 		print $lines[$random_n];
+		$lines[$random_n] = "NaN";
 		$j++;
 	}
 }
