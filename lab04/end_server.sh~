@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kill -9 echo `ps | grep -e netcat -e webserver | cut -c1-5`

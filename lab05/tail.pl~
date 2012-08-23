@@ -14,7 +14,7 @@ foreach $arg (@ARGV) {
 	}
 }
 foreach $f (@files) {
-	$wc_result = `wc -l $f 2>/dev/null`;
+	$wc_result = `wc -l $f`;
 	($num_lines) = split " ", $wc_result;
 	open(F,"<$f") or die "$0: Can't open $f: $!\n";
 	if (@files > 1) {
