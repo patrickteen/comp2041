@@ -7,6 +7,7 @@ echo "Running ./pastes.pl"
 ./paste.pl test_files/file? > output1
 
 echo "Running diff on the output"
+
 if diff output1 output2
 then
 	echo "Test succeeded - output of ./pastes.pl matched /usr/bin/paste"

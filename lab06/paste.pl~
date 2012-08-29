@@ -9,6 +9,6 @@ foreach $file (@ARGV) {
 		chomp $line;
 		print "\t$line";
 	}
-	close F;
+	close (F);
 	print "\n";
 }

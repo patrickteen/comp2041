@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 foreach $file (@ARGV) {
-	open F, "<$file";
+	open F, "<$file" or die $!;
 	$line = <F>;
 	chomp $line;
 	print "$line";
