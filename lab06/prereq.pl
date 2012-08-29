@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 
 my @prereqs;
-my @visited;
 
 my $resursive;
 my $base_course;
@@ -30,7 +29,6 @@ sub get_prereqs {
 			@matches = $line =~ /[A-Z]{4}[0-9]{4}/gi;
 			for $match (@matches) {
 				if (!is_seen($match)) {
-					push(@visited, $match);
 					push(@prereqs, $match);
 					&get_prereqs($match) if $recursive;
 				}
@@ -41,7 +39,7 @@ sub get_prereqs {
 
 sub is_seen {
 	my $found;
-	for $val (@visited) {
+	for $val (@prereqs) {
 		if ($val eq $_[0]) {
 			$found = 1;
 		}
