@@ -9,8 +9,7 @@ dest = sys.argv[2]
 lines = sys.stdin.readlines()
 adj_matrix = {}
 
-visited_nodes = []
-all_nodes = []
+visited = []
 
 # parse input
 for line in lines:
@@ -19,26 +18,24 @@ for line in lines:
 	if not adj_matrix.has_key(components[0]):
 		adj_matrix[components[0]] = {}
 	adj_matrix[components[0]][components[1]] = int(components[2])
-	if not components[0] in all_nodes:
-		all_nodes.append(components[0])
-	if not components[1] in all_nodes:
-		all_nodes.append(components[1])
 
-# brute force as it's small input
+# brute force all paths as it's small input
 # dijkstra/floyd for optimisation
-visited = []
-distance = 0
-def dfs(current, destination):
-	found = 0
+final_path = ""
+min_length = -1
+def dfs(current, destination, path, distance):
+	global min_length
+	global final_path
+	path = path + " " + current
 	if current == destination:
-		found = 1
+		if (min_length == -1) or (distance < min_length):
+			min_length = distance
+			final_path = path
 	else:
 		for v in adj_matrix[current].keys():
-			if not v in visited:
-				found = dfs(v, destination)
+			if v not in visited:
+				visited.append(v)
+				dfs(v, destination, path, distance + adj_matrix[current][v])
 
-	return found
-
-dfs(source, dest)
-
-
+dfs(source, dest, "", 0)
+print ("Shortest route is length = " + str(min_length) + ":" + final_path)
